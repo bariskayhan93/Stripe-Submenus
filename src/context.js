@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import sublinks from "./data";
 
 const AppContext = React.createContext();
@@ -8,6 +8,7 @@ const AppProvider = ({ children }) => {
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const [page, setPage] = useState({ page: "", links: [] });
   const [location, setLocation] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openSidebar = () => {
     setSidebarOpen(true);
@@ -26,6 +27,13 @@ const AppProvider = ({ children }) => {
     setIsSubmenuOpen(false);
   };
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -37,6 +45,10 @@ const AppProvider = ({ children }) => {
         isSubmenuOpen,
         page,
         location,
+        openModal,
+        closeModal,
+        isModalOpen
+
       }}
     >
       {children}
